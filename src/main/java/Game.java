@@ -10,8 +10,21 @@ public class Game {
             return new GuessResult(true, 3,0);
         }
         else {
-            return new GuessResult(false, 0,0);
+            int strikes = 0;
+            int balls =0;
+
+            for(int answeridx =0; answeridx < 3; answeridx++) {
+                for (int guessidx = 0; guessidx < 3; guessidx++) {
+                    if (question.charAt(answeridx) == guessNumber.charAt(guessidx) && answeridx == guessidx) {
+                        strikes++;
+                    } else if (question.charAt(answeridx) == guessNumber.charAt(guessidx)) balls++;
+                }
+            }
+
+
+            return new GuessResult(false, strikes,balls);
         }
+
     }
 
 
