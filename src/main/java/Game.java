@@ -5,26 +5,24 @@ public class Game {
 
     public GuessResult guess(String guessNumber){
         assertIllegalArgument(guessNumber);
+        return getGuessResult(guessNumber);
+    }
 
-        if(guessNumber.equals(question)){
-            return new GuessResult(true, 3,0);
-        }
-        else {
-            int strikes = 0;
-            int balls =0;
+    private GuessResult getGuessResult(String guessNumber) {
+        int strikes = 0;
+        int balls =0;
+        boolean solved =false;
 
-            for(int answeridx =0; answeridx < 3; answeridx++) {
-                for (int guessidx = 0; guessidx < 3; guessidx++) {
-                    if (question.charAt(answeridx) == guessNumber.charAt(guessidx) && answeridx == guessidx) {
-                        strikes++;
-                    } else if (question.charAt(answeridx) == guessNumber.charAt(guessidx)) balls++;
-                }
+        for(int answeridx =0; answeridx < 3; answeridx++) {
+            for (int guessidx = 0; guessidx < 3; guessidx++) {
+                if (question.charAt(answeridx) == guessNumber.charAt(guessidx) && answeridx == guessidx) {
+                    strikes++;
+                } else if (question.charAt(answeridx) == guessNumber.charAt(guessidx)) balls++;
             }
-
-
-            return new GuessResult(false, strikes,balls);
         }
 
+        if(strikes == 3) solved = true;
+        return new GuessResult(solved,strikes, balls);
     }
 
 
